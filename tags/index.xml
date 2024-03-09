@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Ribhu Ratnam</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://ribhuji.github.io/tags/</link>
     <description>Recent content in Tags on Ribhu Ratnam</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     
-	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ribhuji.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     
     <item>
       <title>Just How Many USB Devices Can I Attach to My Computer?</title>
-      <link>http://localhost:1313/just-how-many-usb-devices-can-i-attach-to-my-computer/</link>
+      <link>https://ribhuji.github.io/just-how-many-usb-devices-can-i-attach-to-my-computer/</link>
       <pubDate>Sat, 09 Mar 2024 14:40:43 +0530</pubDate>
       
-      <guid>http://localhost:1313/just-how-many-usb-devices-can-i-attach-to-my-computer/</guid>
+      <guid>https://ribhuji.github.io/just-how-many-usb-devices-can-i-attach-to-my-computer/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Short Answer - It depends!&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -25,12 +25,12 @@
 &lt;p&gt;The USB specification defines two different connectivity types in the USB tree topology: number of layers or tiers and number of endpoints or functions. Please note that endpoints are not the same thing as devices.&lt;/p&gt;
 &lt;h3 id=&#34;defining-usb-tiers&#34;&gt;Defining USB Tiers&lt;/h3&gt;
 &lt;p&gt;USB tiers come from the use of USB hubs, where each USB hub is, in fact, its own USB device as well as the start of a new layer of USB devices. The USB 2.0 specification includes the following diagram to illustrate the USB topology -&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/USBTiers.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ribhuji.github.io/images/USBTiers.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The host and root hub are on the first tier, and connecting to a hub adds another tier. Any USB device&amp;rsquo;s tier number is equal to the connection chain&amp;rsquo;s total non-root hubs multiplied by two. The USB specification has a maximum of seven tiers. As a result, the number of daisy-chained hubs (excluding the root hub) is strictly limited to &lt;b&gt;five&lt;/b&gt;. Moreover most host systems have just one USB controller that is integrated in the host system chipset itself.&lt;/p&gt;
 &lt;p&gt;Here is a typical PC architecture. The USB section is expanded, showing the USB Type A connectors -&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/TypicalPCArchitecture.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ribhuji.github.io/images/TypicalPCArchitecture.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
 &lt;p&gt;What is not commonly known is that many host machines use hub chips internally to expand the number of available USB connectors i.e. the USB ports on a host machine are not Tier 1 but Tier 2 at least. So, it is highly possible that the USB connector on our host machines are already one or even two tiers deep in the overall USB tree. So keeping that in mind the above diagram would look more like this instead -&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/TypicalPCArchitectureWithHub.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ribhuji.github.io/images/TypicalPCArchitectureWithHub.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Thus, the ability to daisy-chain external hubs to keep increasing the number of devices we can connect to our provider hosts is reduced because there are already internal hubs.&lt;/p&gt;
 &lt;h3 id=&#34;defining-usb-endpoints-or-functions&#34;&gt;Defining USB Endpoints or Functions&lt;/h3&gt;
 &lt;p&gt;Each USB device can define up to 32 endpoints (16 inputs and 16 outputs), but most devices only define 2 or 3 endpoints. Hubs themselves also define at least a control endpoint. Every USB controller implementation may have its own layer or endpoint limitations and most modern USB 3.0 hosts use XHCI USB controllers.&lt;/p&gt;
