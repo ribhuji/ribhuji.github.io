@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Ribhu Ratnam</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Home on Ribhu Ratnam</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sat, 09 Mar 2024 14:40:43 +0530</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+    <item>
+      <title>Just How Many USB Devices Can I Attach to My Computer?</title>
+      <link>http://localhost:1313/just-how-many-usb-devices-can-i-attach-to-my-computer/</link>
+      <pubDate>Sat, 09 Mar 2024 14:40:43 +0530</pubDate>
+      
+      <guid>http://localhost:1313/just-how-many-usb-devices-can-i-attach-to-my-computer/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Short Answer - It depends!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Well each one of us at some point have looked at an USB hub and thought, if I keep daisy-chaining these USB-hubs together - Just How Many USB Devices Can I Attach to My Computer?&lt;/p&gt;
+&lt;p&gt;To answer that, let&amp;rsquo;s dive into USB specification a bit -&lt;/p&gt;
+&lt;p&gt;The USB specification defines two different connectivity types in the USB tree topology: number of layers or tiers and number of endpoints or functions. Please note that endpoints are not the same thing as devices.&lt;/p&gt;
+&lt;h3 id=&#34;defining-usb-tiers&#34;&gt;Defining USB Tiers&lt;/h3&gt;
+&lt;p&gt;USB tiers come from the use of USB hubs, where each USB hub is, in fact, its own USB device as well as the start of a new layer of USB devices. The USB 2.0 specification includes the following diagram to illustrate the USB topology -&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/USBTiers.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The host and root hub are on the first tier, and connecting to a hub adds another tier. Any USB device&amp;rsquo;s tier number is equal to the connection chain&amp;rsquo;s total non-root hubs multiplied by two. The USB specification has a maximum of seven tiers. As a result, the number of daisy-chained hubs (excluding the root hub) is strictly limited to &lt;b&gt;five&lt;/b&gt;. Moreover most host systems have just one USB controller that is integrated in the host system chipset itself.&lt;/p&gt;
+&lt;p&gt;Here is a typical PC architecture. The USB section is expanded, showing the USB Type A connectors -&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/TypicalPCArchitecture.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;What is not commonly known is that many host machines use hub chips internally to expand the number of available USB connectors i.e. the USB ports on a host machine are not Tier 1 but Tier 2 at least. So, it is highly possible that the USB connector on our host machines are already one or even two tiers deep in the overall USB tree. So keeping that in mind the above diagram would look more like this instead -&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/TypicalPCArchitectureWithHub.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Thus, the ability to daisy-chain external hubs to keep increasing the number of devices we can connect to our provider hosts is reduced because there are already internal hubs.&lt;/p&gt;
+&lt;h3 id=&#34;defining-usb-endpoints-or-functions&#34;&gt;Defining USB Endpoints or Functions&lt;/h3&gt;
+&lt;p&gt;Each USB device can define up to 32 endpoints (16 inputs and 16 outputs), but most devices only define 2 or 3 endpoints. Hubs themselves also define at least a control endpoint. Every USB controller implementation may have its own layer or endpoint limitations and most modern USB 3.0 hosts use XHCI USB controllers.&lt;/p&gt;
+&lt;p&gt;The XHCI specification allows for a massive 7,906 endpoints, however common implementations of the XHCI controllers impose their own limit on the total number of endpoints to 96. The most notorious of these being Intel&amp;rsquo;s series 8 architectures. This means that the maximum number of devices (which use 3 endpoints) that can be attached to an Intel series 8 XHCI host controller is actually 32 devices (96 endpoints / 3 endpoints per device).&lt;/p&gt;
+&lt;p&gt;To make matters worse, USB 3.0 buses live with USB 2.0 devices i.e they live in the similar yet separate tree architecture in parallel with USB 2.0 devices, but they share the same endpoints on XHCI controllers. USB 3.0 devices may implement endpoints on both the USB 3.0 and 2.0 buses and this further reduces the number of devices which can be attached to a single XHCI host controller.&lt;/p&gt;
+&lt;h3 id=&#34;workarounds-for-these-limitations&#34;&gt;Workarounds for these limitations&lt;/h3&gt;
+&lt;h4 id=&#34;use-ehci-instead-of-xhci&#34;&gt;Use EHCI instead of XHCI&lt;/h4&gt;
+&lt;p&gt;This assumes that the chipsets in your computer support EHCI. And the BIOS on our computer allows you a method to do this. This is possible by default in older motherboards and chipsets (before Intel’s 8th gen).&lt;/p&gt;
+&lt;h4 id=&#34;use-a-usb-20-cable-from-your-computer-to-usb-hub&#34;&gt;Use a USB 2.0 cable from your computer to USB Hub&lt;/h4&gt;
+&lt;p&gt;To add more than 18 total devices to a XHCI system, the simplest solution is to use a USB 2.0 host cable to connect the computer to a USB Hub. Since the USB Hub is now connected only with USB 2.0, there will not be any enumeration of USB 3.0 devices, including the USB 3.0 hub chips internal to the USB Hub. This will effectively reduce the USB Hub’s footprint in the USB tree by 50%.&lt;/p&gt;
+&lt;h4 id=&#34;add-a-discrete-usb-controller-to-your-computer&#34;&gt;Add a discrete USB controller to your computer&lt;/h4&gt;
+&lt;p&gt;The main limitation in a computer is the integrated Intel XHCI USB host controller, and discrete USB host controllers do not have this limitation. Adding a discrete USB host controller in a PCIe expansion slot will increase the number of devices you can connect to your computer.&lt;/p&gt;
+&lt;h3 id=&#34;so-in-summary&#34;&gt;So In Summary&lt;/h3&gt;
+&lt;p&gt;Let&amp;rsquo;s say you have an Intel computer with 10 USB ports on it. And unlimited supply of USB hubs with 5 USB ports on it. Then this is the long answer -&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr class=&#34;canon&#34;&gt;
+    &lt;th&gt;Configuration&lt;/th&gt;
+    &lt;th&gt;Reason&lt;/th&gt;
+    &lt;th&gt;Maximum devices&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;config&#34;&gt;Your Computer&lt;/td&gt;
+    &lt;td&gt;No. of physical USB ports on it.&lt;/td&gt;
+    &lt;td&gt;~10&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;config&#34;&gt;Your computer + 1 USB hub&lt;/td&gt;
+    &lt;td&gt;Limited by port on the hub, will add 5 more ports but take one away from the host where the hub will be connected&lt;/td&gt;
+    &lt;td&gt;14&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;config&#34;&gt;Your computer + 2 USB hub&lt;/td&gt;
+    &lt;td&gt;Limited by port on the hub, will add 5 more ports but take one away from the host where the hub will be connected&lt;/td&gt;
+    &lt;td&gt;18&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;config&#34;&gt;Your computer + more than 2USB hub&lt;/td&gt;
+    &lt;td&gt;Limited by the USB 3.0 standards&lt;/td&gt;
+    &lt;td&gt;18&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;config&#34;&gt;Your computer + more than 2 USB hub&lt;/td&gt;
+    &lt;td&gt;Limited by the USB 3.0 standards&lt;/td&gt;
+    &lt;td&gt;18&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;config&#34;&gt;Your computer + USB 2.0 cables +  more than 2 USB hub&lt;/td&gt;
+    &lt;td&gt;Limited by the XHCI USB controller on Intel chipsets&lt;/td&gt;
+    &lt;td&gt;18&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;config&#34;&gt;Your computer + PCIe USB extension cards&lt;/td&gt;
+    &lt;td&gt;Limited by number of physical PCIe lanes on the motherboard, prebuilt computers don&#39;t have more than 2, and one is already occupied by a GPU&lt;/td&gt;
+    &lt;td&gt; &lt;127 (Realistically somewhere around 64 as the best hubs can not support more than 32 devices) &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;hr/&gt;
+&lt;h4 id=&#34;external-references--&#34;&gt;External References -&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://acroname.com/blog/how-many-usb-devices-can-i-connect&#34;&gt;Blog by Acroname&lt;/a&gt;&lt;/p&gt;
+
+&lt;style&gt;
+.canon { background: rgb(240, 219, 240); width: 100%; height: auto; color: black;}
+.config { background: rgb(213, 246, 213); height: auto; color: black;}
+&lt;/style&gt;
+
+</description>
+    </item>
+    
+    
+    
+    
+  </channel>
+</rss>
