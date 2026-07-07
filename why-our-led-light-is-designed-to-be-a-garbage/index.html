@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ribhu Ratnam&#39;s website">
+    
+    <link rel="shortcut icon" href="https://ribhu.in/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <link rel="canonical" href="https://ribhu.in/why-our-led-light-is-designed-to-be-a-garbage/" />
+    <link rel="stylesheet" href="https://ribhu.in/css/custom.css">
+    <title>Why Our LED Light is Designed to Be A Garbage</title>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\\\(', right: '\\\\)', display: false},
+                {left: '\\\\[', right: '\\\\]', display: true}
+            ],
+            throwOnError: false
+        });"></script>
+    
+</head><body><header id="banner">
+    <h2><a href="https://ribhu.in/">Ribhu Ratnam</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li><li>
+                <a href="/about/" title="about">about</a>
+            </li><li>
+                <a href="/papers/" title="papershelf">papershelf</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>Why Our LED Light is Designed to Be A Garbage</h1>
+        <div>
+                <time>June 19, 2026</time>
+            </div>
+    </header><p>My LED batton started flickering a while ago. So naturally the electrician suggested to get it replaced, and I did exactly that. But I wanted to understand what went wrong in that batton, and what could I learn from it.</p>
+<p>What I found inside was not fun, it was a lesson in why our electronics are designed to become e-waste.</p>
+<h3 id="whats-really-inside">What&rsquo;s Really Inside?</h3>
+<p>If you look closely at standard consumer electronics, you quickly realize they are designed to fail at their weakest link. In a standard LED batten, that link is almost <em>never</em> the actual LEDs. It&rsquo;s the cheap AC-to-DC driver circuit that runs everything.</p>
+<p>Here is the perpetrator on my desk:</p>
+<p><img src="/images/ACToDCDriver.jpeg" alt="actodc"></p>
+<p>I asked a large language model to create a diagram of it as well, for better understanding -</p>
+<p><img src="/images/ACToDCDriverCircuit.png" alt="Autopsy of LED batten driver circuit"></p>
+<h3 id="why-87v-is-the-anti-reuse-voltage">Why 87V is the &ldquo;Anti-Reuse&rdquo; Voltage</h3>
+<p>I looked at the long, beautiful rigid strip of perfectly intact surface-mount LEDs inside and thought I should be able to reus eit somehow.</p>
+<p>Standard flexible LED strips we buy for under-cabinet lighting run on a friendly, safe $12\text{V}$ or $24\text{V}$. You can power them with an old router brick. I checked the aluminum backing of my salvaged strip, expecting a simple voltage requirement. Then I saw the markings on the aluminum strip: <code>(29X3)</code>.</p>
+<p><code>29X3</code>. That is the engineering recipe.</p>
+<p><img src="/images/LEDStrip.png" alt="LEDStripImage"></p>
+<p>In the world of LED manufacturing, white surface-mount LEDs have a predictable forward voltage drop of about $3\text{V}$. To maximize efficiency, manufacturers wire them in large, complex groups. The <code>29X3</code> code means <strong>29 groups wired in series, with each group containing 3 LEDs wired in parallel</strong>.</p>
+<p>Let&rsquo;s do the simple, frustrating math:</p>
+<p>$$\text{Total System Voltage} = 29 \text{ groups} \times 3\text{V} \text{ drop/group} = 87\text{V DC}$$</p>
+<p>To light this up, you need a high-voltage, constant-current driver. You cannot use a 12V wall adapter, a USB power bank, or a simple battery. By engineering the light for this niche 87V ecosystem, the manufacturer has made the working strip effectively &ldquo;un-hackable&rdquo; for the average person.</p>
+<p>Another LLM created image to show the parallel configuration:</p>
+<p><img src="/images/SeriesLEDConfig.png" alt="Series-parallel wiring breakdown showing 29x3 configuration"></p>
+<p>Could they have built this differently? Absolutely.</p>
+<p>If the industry standardized on a modular input (like 12V or 24V), the strip would still be perfectly functional even if the driver died. You could unclip the old driver, buy a new generic power supply, and keep using the light.</p>
+<p>But there is one primary reason they chose this high-voltage design: <strong>Cost Optimization at the Expense of Sustainability.</strong></p>
+<p>When a batten sells for ₹100–150 (about $1.50 USD, or higher depending on how bad INR is performing), every paisa of copper counts.</p>
+<table>
+	<thead>
+			<tr>
+					<th>Feature</th>
+					<th>High-Voltage Design (Current)</th>
+					<th>Low-Voltage Modular Design</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Current Required</strong></td>
+					<td><strong>Very Low</strong> (~230mA)</td>
+					<td><strong>Very High</strong> (~1.67A)</td>
+			</tr>
+			<tr>
+					<td><strong>Copper Wire (PCB)</strong></td>
+					<td>Ultra-Thin (Cheap)</td>
+					<td>Thick (Expensive)</td>
+			</tr>
+			<tr>
+					<td><strong>Transformer Cost</strong></td>
+					<td>Low (Small Step-Down)</td>
+					<td>High (Robust Step-Down)</td>
+			</tr>
+			<tr>
+					<td><strong>Estimated Factory Cost</strong></td>
+					<td><strong>~₹70</strong></td>
+					<td><strong>~₹120</strong></td>
+			</tr>
+	</tbody>
+</table>
+<p>By choosing 87V, the manufacturer minimizes the current ($I=\frac{P}{V}$), allowing them to use razor-thin copper traces and microscopic wires throughout the 4-foot length of the light. Sustainability is deliberately sacrificed to keep the retail price below ₹150.</p>
+<h3 id="my-conclusion-rant">My Conclusion/ Rant</h3>
+<p>We are living in an era where we can buy a bright, efficient, 20-watt light fixture for lesser than the price of a cup of coffee at Third Wave. But we are paying for that low price with the planet. Because the driver and the strip are locked in a dependency that only makes economic sense at ₹150, the moment the 5-rupee capacitor fails, the entire fixture is sentenced to a landfill.</p>
+<p>We need to push for circular design, where the light panel and the power source are modular. We need to be climate first and we need to design things that can be hacked and reused.</p>
+</article>
+
+        </main><footer id="footer">
+    Copyright © 2026 Ribhu Ratnam
+</footer>
+</body>
+</html>
