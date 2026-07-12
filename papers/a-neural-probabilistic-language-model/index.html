@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ribhu Ratnam&#39;s website">
+    
+    <link rel="shortcut icon" href="https://ribhu.in/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <link rel="canonical" href="https://ribhu.in/papers/a-neural-probabilistic-language-model/" />
+    <link rel="stylesheet" href="https://ribhu.in/css/custom.css">
+    <title>A Neural Probabilistic Language Model</title>
+
+    
+</head><body><header id="banner">
+    <h2><a href="https://ribhu.in/">Ribhu Ratnam</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li><li>
+                <a href="/about/" title="about">about</a>
+            </li><li>
+                <a href="/papers/" title="papershelf">papershelf</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article class="paper-page">
+    <header class="paper-header">
+        <h1>A Neural Probabilistic Language Model</h1>
+        <div class="paper-venue">JMLR</div>
+        <div class="paper-year">2003</div>
+    </header>
+    <div class="paper-abstract">
+        <h3>Abstract</h3>
+        A goal of statistical language modeling is to learn the joint probability function of sequences of words in a language. This is intrinsically difficult because of the curse of dimensionality: a word sequence on which the model will be tested is likely to be different from all the word sequences seen during training. Traditional but very successful approaches based on n-grams obtain generalization by concatenating very short overlapping sequences seen in the training set. We propose to fight the curse of dimensionality by learning a distributed representation for words which allows each training sentence to inform the model about an exponential number of semantically neighboring sentences. The model learns simultaneously (1) a distributed representation for each word along with (2) the probability function for word sequences, expressed in terms of these representations.
+    </div>
+    <div class="paper-notes">
+        <h3>My Notes</h3>
+        <p><strong>Architecture:</strong></p>
+<p>The model takes a sequence of previous words, maps each to a dense vector (embedding) via a shared lookup table, concatenates these vectors, passes them through a hidden layer with a tanh activation, and outputs a probability distribution over the next word using softmax. The key insight is that words with similar meanings end up near each other in the embedding space.</p>
+<p><img src="/images/bengio_nplm_architecture.png" alt="Neural Network Architecture"></p>
+<p><strong>Key Ideas:</strong></p>
+<ol>
+<li>
+<p><strong>Word embeddings as distributed representations</strong>: Each word is mapped to a vector in a continuous space (e.g., 30 dimensions). Words that are semantically similar (like &ldquo;running&rdquo; and &ldquo;walking&rdquo;, or &ldquo;cat&rdquo; and &ldquo;dog&rdquo;) cluster together in this space, while unrelated words are far apart. This is the precursor to modern word embeddings like Word2Vec and GloVe.</p>
+</li>
+<li>
+<p><strong>Maximizing log-likelihood</strong>: The model is trained by maximizing the log-likelihood of the training data, similar to how trigram or bigram models work. But instead of counting co-occurrences, the neural network learns a smooth probability function that generalizes better to unseen sequences.</p>
+</li>
+<li>
+<p><strong>Fighting the curse of dimensionality</strong>: N-gram models suffer because the number of possible word combinations grows exponentially. By learning continuous representations, the model can generalize from a single observed sequence to all sequences involving similar words.</p>
+</li>
+</ol>
+<p><strong>Why it matters:</strong></p>
+<p>This paper laid the groundwork for virtually all modern NLP. The idea that words can be represented as dense vectors in a learned space became the foundation for Word2Vec, GloVe, and eventually the contextual embeddings used in Transformers and large language models today. The architecture itself is simple, but the principle of learning word representations jointly with the task was revolutionary.</p>
+
+    </div>
+    
+    <div class="paper-links">
+        <a href="https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf" target="_blank" rel="noopener" class="paper-link">📄 Paper</a>
+    </div>
+    <div class="paper-tags">
+        <span class="paper-tag">word-embeddings</span>
+        <span class="paper-tag">neural-networks</span>
+        <span class="paper-tag">language-modeling</span>
+        <span class="paper-tag">nlp</span>
+        <span class="paper-tag">foundational</span>
+    </div>
+    
+    
+</article>
+
+        </main><footer id="footer">
+    Copyright © 2026 Ribhu Ratnam
+</footer>
+</body>
+</html>
